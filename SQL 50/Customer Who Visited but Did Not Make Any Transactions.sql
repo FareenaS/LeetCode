@@ -83,8 +83,9 @@ GROUP BY V.customer_id;
 
 
 --Using left join and null (Optimized solution)
-select customer_id, count(visits.visit_id) as count_no_trans from visits
-left join transactions
-on visits.visit_id = transactions.visit_id
-where transaction_id is null
-group by customer_id
+select v.customer_id, count(v.visit_id) as count_no_trans
+from Visits as v
+left join Transactions as t
+ON v.visit_id = t.visit_id 
+where t.visit_id is null
+group by customer_id;
