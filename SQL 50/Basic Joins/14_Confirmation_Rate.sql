@@ -70,13 +70,17 @@ User 7 made 3 requests and all were confirmed. The confirmation rate is 1.
 User 2 made 2 requests where one was confirmed and the other timed out. The confirmation rate is 1 / 2 = 0.5.
 */
 
+/*
+Formula for calculating confirmation_rate: SUM(action='confirmed')/COUNT(action='confirmed')
+We are using CASE WHEN bcz action='confirmed' is a boolean expression which is not implicitly converted to a numeric value like in some other SQL dialects
+As we r using aggregate function, we should use GROUP BY
+*/
 
 --Using sum and Count functions
 SELECT S.user_id,
 ISNULL(ROUND(SUM(CASE WHEN action='confirmed' THEN 1.00 ELSE 0.00 END)/COUNT(*),2),0.00) as confirmation_rate
 FROM signups S
 LEFT JOIN Confirmations C ON S.user_id=C.user_id
-AND S.time_stamp=C.time_stamp
 GROUP BY S.user_id;
 
 --Using AVG function
