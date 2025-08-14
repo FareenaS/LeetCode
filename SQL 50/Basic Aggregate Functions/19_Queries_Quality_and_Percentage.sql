@@ -73,3 +73,5 @@ ROUND(AVG(rating*1.0/position),2)  as quality,
 ROUND(AVG(CASE WHEN rating<3 THEN 1*1.0 ELSE 0 END)*100,2) as poor_query_percentage
 FROM Queries
 GROUP BY query_name;
+
+--Query 2 (using 1.0 for implicit float conversion) will run faster and is recommended unless you need the extra precision of a high-scale DECIMAL
