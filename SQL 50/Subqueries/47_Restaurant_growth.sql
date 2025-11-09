@@ -86,13 +86,14 @@ end_date as visited_on
 ,rolling_average AS average_amount
 FROM rolling_calculation
 WHERE end_date IS NOT NULL
-ORDER BY end_date
+ORDER BY end_date;
 
 
 --Using Group By directly
-select visited_on
-,sum(sum(amount)) over (order by visited_on rows between 6 preceding and current row) as amount
-,round(sum(sum(amount)) over (order by visited_on rows between 6 preceding and current row) / 7.0,2) as average_amount 
-from Customer
-group by visited_on
-ORDER BY visited_on OFFSET 6 ROWS 
+SELECT
+visited_on,
+SUM(SUM(amount)) OVER(ORDER BY visited_on ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS amount,
+ROUND((SUM(SUM(amount)) OVER(ORDER BY visited_on ROWS BETWEEN 6 PRECEDING AND CURRENT ROW)/7.0),2)AS average_amount
+FROM Customer
+GROUP BY visited_on
+ORDER BY visited_on OFFSET 6 ROW;
