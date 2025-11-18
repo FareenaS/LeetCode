@@ -47,3 +47,13 @@ WHERE W1.temperature > W2.temperature;
 
 
 --Using LAG function
+--Read the question properly, they want to compare the temperature between the recordDate and recordDate-1(Yesterday's date of recordDate).
+WITH PreviousDayTemperatureCalculation AS(
+SELECT *,
+LAG(temperature) OVER(ORDER BY recordDate) AS previoudDayTemp,
+LAG(recordDate) OVER(ORDER BY recordDate) AS previousDay
+FROM Weather)
+SELECT id
+FROM PreviousDayTemperatureCalculation
+WHERE temperature > previoudDayTemp
+AND DATEDIFF(day,previousDay,recordDate)=1
