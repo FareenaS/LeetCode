@@ -40,6 +40,7 @@ In 2015-01-04, the temperature was higher than the previous day (20 -> 30).
 */
 
 --Using Self-Join
+--As we have to compare based on date also, we will be joining the tables based on date here
 SELECT W1.id
 FROM Weather W1
 JOIN Weather W2 ON W1.recordDate = DATEADD(day,1,W2.recordDate)
