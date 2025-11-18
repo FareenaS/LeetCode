@@ -39,6 +39,14 @@ In 2015-01-02, the temperature was higher than the previous day (10 -> 25).
 In 2015-01-04, the temperature was higher than the previous day (20 -> 30).
 */
 
+/*
+We can solve this problem in two ways
+1. Using lag function
+2. Using Self join
+
+We need to note here that in both the methods, we need to comapre recordDate with yesterday's date, i.e., we need to join based on date(If using join) and calculate previous day's date(if u r using lag() function)
+*/
+
 --Using Self-Join
 --As we have to compare based on date also, we will be joining the tables based on date here
 SELECT W1.id
