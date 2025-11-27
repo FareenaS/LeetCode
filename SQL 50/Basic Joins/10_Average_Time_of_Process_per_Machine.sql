@@ -82,6 +82,7 @@ JOIN Activity A2 ON A1.machine_id=A2.machine_id
 GROUP BY A1.machine_id;
 
 --Nov 27,2025
+--This is faster because it filters rows before joining, reducing the dataset size and making the join operation cheaper and faster.
 SELECT A1.machine_id
 ,ROUND(SUM(A2.timestamp-A1.timestamp) / COUNT(A1.machine_id) ,3) AS processing_time
 FROM Activity A1
