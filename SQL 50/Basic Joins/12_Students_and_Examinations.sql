@@ -115,3 +115,12 @@ LEFT JOIN Examinations E ON E.student_id=S.student_id
 AND Sub.subject_name=E.subject_name
 GROUP BY S.student_id, S.student_name, Sub.subject_name
 ORDER BY S.student_id, Sub.subject_name;
+
+--Nov 26,2025
+SELECT S.student_id, S.student_name, Su.subject_name,
+COUNT(E.student_id) AS attended_exams
+FROM Students S 
+CROSS JOIN Subjects Su
+LEFT JOIN Examinations E ON Su.subject_name=E.Subject_name AND E.student_id=S.student_id
+GROUP BY S.student_id, S.student_name, Su.subject_name
+ORDER BY S.student_id,Su.subject_name
