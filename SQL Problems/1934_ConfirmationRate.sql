@@ -1,3 +1,5 @@
+--Medium
+--Left Join + Case When + Aggregate function
 /*
 Table: Signups
 
@@ -76,6 +78,7 @@ User 7 made 3 requests and all were confirmed. The confirmation rate is 1.
 User 2 made 2 requests where one was confirmed and the other timed out. The confirmation rate is 1 / 2 = 0.5.
 */
 
+--Avoid using CTE, keep it simple using AVG() function
 --Using CTE
 WITH Confirm_count AS(
     SELECT user_id,COUNT(*) AS confirmed_count
